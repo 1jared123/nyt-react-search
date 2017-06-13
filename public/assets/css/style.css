@@ -1,0 +1,106 @@
+/*Styling!!*/
+
+body {
+	background-color: #f2f2f2;
+	padding-bottom: 20px;
+}
+
+h1 {
+	color: #248f8f;
+	text-shadow: 0 0 5px #0099cc, 0 0 10px #0099cc,
+             0 0 20px #0099cc, 0 0 30px #0099cc,
+             0 0 40px #0099cc;
+}
+
+h2 {
+	font-size: 24px;
+	color: #2eb8b8;
+	text-shadow: 1px 1px 1px #ccc;
+
+}
+
+
+input,
+textarea {
+	width: 100%;
+}
+
+
+
+ #notes {
+ 	display: inline-block;
+        width: 50%;
+}
+
+#past_notes {
+	width: 100%;
+}
+
+.page-wrap {
+  min-height: 100%;
+	margin-bottom: -60px; 
+}
+
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.footer-hs, .page-wrap:after {
+	height: 60px; 
+}
+.footer-hs {
+  background: orange;
+}
+
+.navigation {
+	background-color: #fff;
+}
+
+.main-screen {
+	padding: 10px;
+}
+
+
+.footer-hs {
+    text-align: center;
+    border-top: 1px solid #ccc;
+    padding: 5px auto 0px auto;
+    background-color: #ddd;
+}
+container-fluid.navigation {
+	height: 70px;
+}
+
+.header-hs {
+	border-bottom-width: 5px;
+}
+
+.navbar-brand {
+	padding: 5px;
+}
+
+.logo {
+	height: 50px;
+	width: 70px;
+}
+
+.welcome-text {
+	padding: 5px;
+	font-size: 150%;
+    color: #444;
+	text-shadow:
+	   1px 0px 1px #ccc, 0px 1px 1px #eee,
+	   2px 1px 1px #ccc, 1px 2px 1px #eee,
+	   3px 2px 1px #ccc, 2px 3px 1px #eee,
+	   4px 3px 1px #ccc, 3px 4px 1px #eee,
+	   5px 4px 1px #ccc, 4px 5px 1px #eee,
+	   6px 5px 1px #ccc, 5px 6px 1px #eee,
+	   7px 6px 1px #ccc;
+
+}
+
+.user-text {
+    font-size: 15px;
+    font-weight: bold;
+    padding-top: 5px;
+}
