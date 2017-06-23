@@ -10,7 +10,7 @@ var ArticleSchema = new Schema({
     type: String
   },
   // link is a required string
-  date: {
+  link: {
     type: String,
     unique: true
   },

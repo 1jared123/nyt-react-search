@@ -2,10 +2,30 @@
 var React = require("react");
 
 // Here we include all of the sub-components
-var Child = require("./Child");
+var Saved = require("./Saved");
+var Search = require("./Search");
 
 // Requiring our helper for making API calls
 var helpers = require("../utils/helpers");
+
+//Api requests vars -------------------------------------------
+//Our authentication key
+var authKey = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
+
+// These variables will hold the results we get from the user's inputs via HTML
+var searchTerm = "";
+var numResults = 0;
+var startYear = 0;
+var endYear = 0;
+
+// queryURLBase begins the search
+var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
+  authKey + "&q=";
+
+// Counter to keep track of article numbers as they come in
+var articleCounter = 0;
+//-------------------------------------------------------------
+
 
 // Create the Parent Component
 var Parent = React.createClass({
@@ -56,17 +76,13 @@ var Parent = React.createClass({
     this.setState({ clicks: this.state.clicks + 1 });
   },
 
-  // Whenever the button is clicked we'll use setState to reset the clickCounter
-  // This will reset the clicks -- and it will be passed ALL children
-  resetClick: function() {
-    this.setState({ clicks: 0 });
-  },
+  
 
   // Here we render the function
   render: function() {
     return (
         <div className="container">
-          <div className="jumbotron" style="background-color: #20315A ; color: white;">
+          <div className="jumbotron">
             <h1 className="text-center"><strong><i className="fa fa-newspaper-o"></i> New York Times Search</strong></h1>
           </div>
 
@@ -106,7 +122,7 @@ var Parent = React.createClass({
                       <input type="text" className="form-control" id="end-year"></input>
                     </div>
 
-                    <button type="submit" className="btn btn-default" id="run-search"><i className="fa fa-search"></i> Search</button>
+                    <button type="submit" className="btn btn-default" id="run-search" onClick={this.runQuery}><i className="fa fa-search"></i> Search</button>
                     <button type="button" className="btn btn-default" id="clear-all"><i className="fa fa-trash"></i> Clear Results</button>
 
                   </form>
@@ -115,28 +131,9 @@ var Parent = React.createClass({
             </div>
           </div>
 
-          <div className="row">
-            <div className="col-sm-12">
+          <Saved />  
 
-              <div className="panel panel-primary">
-
-                <div className="panel-heading">
-                  <h3 className="panel-title"><strong><i className="fa fa-table"></i>   Top Articles</strong></h3>
-                </div>
-
-                <div className="panel-body" id="well-section">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-sm-12">
-
-              <h5 className="text-center"><small>Made by Ahmed with lots and lots of <i className="fa fa-heart"></i></small></h5>
-
-            </div>
-          </div>
+          <Search />         
         </div>
     );
   }

@@ -103,9 +103,7 @@ function runQuery(numArticles, queryURL) {
 
 // on.("click") function associated with the Search Button
 $("#run-search").on("click", function(event) {
-  // This line allows us to take advantage of the HTML "submit" property
-  // This way we can hit enter on the keyboard and it registers the search
-  // (in addition to clicks).
+
   event.preventDefault();
 
   // Initially sets the articleCounter to 0
