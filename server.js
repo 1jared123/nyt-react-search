@@ -25,7 +25,7 @@ router.use(bodyParser.urlencoded({
   extended: false
 }));
 
-var Article = require("../models/Article.js");
+var Article = require("./models/Article.js");
 
 //here the connection to mongodb for heroku.
 mongoose.connect("mongodb://localhost/nytreact");

@@ -8,20 +8,6 @@ var Search = require("./Search");
 // Requiring our helper for making API calls
 var helpers = require("../utils/helpers");
 
-//Api requests vars -------------------------------------------
-//Our authentication key
-var authKey = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
-
-// These variables will hold the results we get from the user's inputs via HTML
-var searchTerm = "";
-var numResults = 0;
-var startYear = 0;
-var endYear = 0;
-
-// queryURLBase begins the search
-var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
-  authKey + "&q=";
-
 // Counter to keep track of article numbers as they come in
 var articleCounter = 0;
 //-------------------------------------------------------------
@@ -33,8 +19,7 @@ var Parent = React.createClass({
   // Here we set a generic state associated with the number of clicks
   getInitialState: function() {
     return {
-      clicks: 0,
-      clickID: "Main"
+      articles: [],
     };
   },
 
@@ -74,6 +59,29 @@ var Parent = React.createClass({
   // Note the syntax for setting the state
   handleClick: function() {
     this.setState({ clicks: this.state.clicks + 1 });
+  },
+
+
+  runQuery: function(numArticles, queryURL) {
+
+    var term = $("#search-term").val();
+
+    var numberRecords = $("num-records-select").val();
+
+    var startYear = $("start-year").val();
+
+    var endYear = $("end-year").val();
+
+    var queryURL = "http://developer.nytimes.com/proxy/https/api.nytimes.com/svc/search/v2/articlesearch.json?api-key=c6b6d232645147c99d22e7386777c49f&q=" + term + "&begin_date=" + startYear + "&end_date=" + endYear ;
+
+
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).done(function(NYTData) {
+        this.setState({ articles: NYTData })
+    });
+
   },
 
   
@@ -131,9 +139,11 @@ var Parent = React.createClass({
             </div>
           </div>
 
+          <Search articles= {this.state.articles}/>
+
           <Saved />  
 
-          <Search />         
+                   
         </div>
     );
   }

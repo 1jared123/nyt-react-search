@@ -4,6 +4,23 @@ var React = require("react");
 // Here we include all of the sub-components
 var GrandChild = require("./Grandchild");
 
+//Api requests vars -------------------------------------------
+//Our authentication key
+var authKey = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
+
+// These variables will hold the results we get from the user's inputs via HTML
+var searchTerm = "";
+var numResults = 0;
+var startYear = 0;
+var endYear = 0;
+
+// queryURLBase begins the search
+var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
+  authKey + "&q=";
+
+// Counter to keep track of article numbers as they come in
+var articleCounter = 0;
+
 // Create the Search Component
 var Search = React.createClass({
 
@@ -12,25 +29,8 @@ var Search = React.createClass({
     };
   },
 
-  runQuery: function(numArticles, queryURL) {
-
-    var term = $("#search-term").val();
-
-    var numberRecords = $("num-records-select").val();
-
-    var startYear = $("start-year").val();
-
-    var endYear = $("end-year").val();
-
-    var queryURL = "http://developer.nytimes.com/proxy/https/api.nytimes.com/svc/search/v2/articlesearch.json?api-key=c6b6d232645147c99d22e7386777c49f&q=" + term + "&begin_date=" + startYear + "&end_date=" + endYear ;
-
-
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).done(function(NYTData) {
-
-      // Logging the URL so we have access to it for troubleshooting
+  renderState: function() {
+    // Logging the URL so we have access to it for troubleshooting
       console.log("------------------------------------");
       console.log("URL: " + queryURL);
       console.log("------------------------------------");
@@ -91,8 +91,7 @@ var Search = React.createClass({
         console.log(NYTData.response.docs[i].web_url);
       }
     });
-
-  },
+  }
   
   render: function() {
     return (
