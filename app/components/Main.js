@@ -8,8 +8,10 @@ var Search = require("./Search");
 // Requiring our helper for making API calls
 var helpers = require("../utils/helpers");
 
-// Counter to keep track of article numbers as they come in
-var articleCounter = 0;
+// queryURLBase begins the search
+var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
+  authKey + "&q=";
+
 //-------------------------------------------------------------
 
 

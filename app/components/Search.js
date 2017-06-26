@@ -14,9 +14,6 @@ var numResults = 0;
 var startYear = 0;
 var endYear = 0;
 
-// queryURLBase begins the search
-var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
-  authKey + "&q=";
 
 // Counter to keep track of article numbers as they come in
 var articleCounter = 0;
