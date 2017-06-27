@@ -21,94 +21,113 @@ var articleCounter = 0;
 // Create the Search Component
 var Search = React.createClass({
 
-  getInitialState: function() {
-    return {
-    };
-  },
+        getInitialState: function() {
+            return {
+                results: {};
+            };
+        },
 
-  renderState: function() {
-    // Logging the URL so we have access to it for troubleshooting
-      console.log("------------------------------------");
-      console.log("URL: " + queryURL);
-      console.log("------------------------------------");
+        setQuery: function(newQuery, newStart, newEnd) {
+            helpers.runQuery(newQuery, newStart, newEnd).then(function(data) {
+                this.setState({ results: { docs: data.docs } });
+            }).bind(this);
+        },
 
-      // Log the NYTData to console, where it will show up as an object
-      console.log(NYTData);
-      console.log("------------------------------------");
+        renderState: function() {
 
-      // Loop through and provide the correct number of articles
-      for (var i = 0; i < numArticles; i++) {
+            console.log("Render restuls", this.state.results);
 
-        // Add to the Article Counter (to make sure we show the right number)
-        articleCounter++;
 
-        // Create the HTML well (section) and add the article content for each
-        var wellSection = $("<div>");
-        wellSection.addClass("well");
-        wellSection.attr("id", "article-well-" + articleCounter);
-        $("#well-section").append(wellSection);
+            // Logging the URL so we have access to it for troubleshooting
+            console.log("------------------------------------");
+            console.log("URL: " + queryURL);
+            console.log("------------------------------------");
 
-        // Confirm that the specific JSON for the article isn't missing any details
-        // If the article has a headline include the headline in the HTML
-        if (NYTData.response.docs[i].headline !== "null") {
-          $("#article-well-" + articleCounter)
-            .append(
-              "<h3 class='articleHeadline'><span class='label label-primary'>" +
-              articleCounter + "</span><strong> " +
-              NYTData.response.docs[i].headline.main + "</strong></h3>"
-            );
+            // Log the NYTData to console, where it will show up as an object
+            console.log(NYTData);
+            console.log("------------------------------------");
 
-          // Log the first article's headline to console
-          console.log(NYTData.response.docs[i].headline.main);
-        }
+            // Loop through and provide the correct number of articles
+            for (var i = 0; i < numArticles; i++) {
 
-        // If the article has a byline include the headline in the HTML
-        if (NYTData.response.docs[i].byline && NYTData.response.docs[i].byline.original) {
-          $("#article-well-" + articleCounter)
-            .append("<h5>" + NYTData.response.docs[i].byline.original + "</h5>");
+                // Add to the Article Counter (to make sure we show the right number)
+                articleCounter++;
 
-          // Log the first article's Author to console.
-          console.log(NYTData.response.docs[i].byline.original);
-        }
+                // Create the HTML well (section) and add the article content for each
+                var wellSection = $("<div>");
+                wellSection.addClass("well");
+                wellSection.attr("id", "article-well-" + articleCounter);
+                $("#well-section").append(wellSection);
 
-        // Then display the remaining fields in the HTML (Section Name, Date, URL)
-        $("#articleWell-" + articleCounter)
-          .append("<h5>Section: " + NYTData.response.docs[i].section_name + "</h5>");
-        $("#articleWell-" + articleCounter)
-          .append("<h5>" + NYTData.response.docs[i].pub_date + "</h5>");
-        $("#articleWell-" + articleCounter)
-          .append(
-            "<a href='" + NYTData.response.docs[i].web_url + "'>" +
-            NYTData.response.docs[i].web_url + "</a>"
-          );
+                // Confirm that the specific JSON for the article isn't missing any details
+                // If the article has a headline include the headline in the HTML
+                if (NYTData.response.docs[i].headline !== "null") {
+                    $("#article-well-" + articleCounter)
+                        .append(
+                            "<h3 class='articleHeadline'><span class='label label-primary'>" +
+                            articleCounter + "</span><strong> " +
+                            NYTData.response.docs[i].headline.main + "</strong></h3>"
+                        );
 
-        // Log the remaining fields to console as well
-        console.log(NYTData.response.docs[i].pub_date);
-        console.log(NYTData.response.docs[i].section_name);
-        console.log(NYTData.response.docs[i].web_url);
-      }
-    });
-  }
-  
-  render: function() {
-    return (
-      <div className="row">
-        <div className="col-sm-12">
+                    // Log the first article's headline to console
+                    console.log(NYTData.response.docs[i].headline.main);
+                }
 
-          <div className="panel panel-primary">
+                // If the article has a byline include the headline in the HTML
+                if (NYTData.response.docs[i].byline && NYTData.response.docs[i].byline.original) {
+                    $("#article-well-" + articleCounter)
+                        .append("<h5>" + NYTData.response.docs[i].byline.original + "</h5>");
 
-            <div className="panel-heading">
-              <h3 className="panel-title">
-                <strong><i className="fa fa-table" /> Top Articles</strong>
-              </h3>
-            </div>
+                    // Log the first article's Author to console.
+                    console.log(NYTData.response.docs[i].byline.original);
+                }
 
-            <div className="panel-body" id="well-section" />
-          </div>
-        </div>
-      </div>;
-    );
-  }
+                // Then display the remaining fields in the HTML (Section Name, Date, URL)
+                $("#articleWell-" + articleCounter)
+                    .append("<h5>Section: " + NYTData.response.docs[i].section_name + "</h5>");
+                $("#articleWell-" + articleCounter)
+                    .append("<h5>" + NYTData.response.docs[i].pub_date + "</h5>");
+                $("#articleWell-" + articleCounter)
+                    .append(
+                        "<a href='" + NYTData.response.docs[i].web_url + "'>" +
+                        NYTData.response.docs[i].web_url + "</a>"
+                    );
+
+                // Log the remaining fields to console as well
+                console.log(NYTData.response.docs[i].pub_date);
+                console.log(NYTData.response.docs[i].section_name);
+                console.log(NYTData.response.docs[i].web_url);
+            }
+        });
+}
+
+render: function() {
+return ( <
+    div className = "row" >
+    <
+    div className = "col-sm-12" >
+
+    <
+    div className = "panel panel-primary" >
+
+    <
+    div className = "panel-heading" >
+    <
+    h3 className = "panel-title" >
+    <
+    strong > < i className = "fa fa-table" / > Top Articles < /strong> <
+    /h3> <
+    /div>
+
+    <
+    div className = "panel-body"
+    id = "well-section" / >
+    <
+    /div> <
+    /div> <
+    /div>;
+);
+}
 });
 
 // Export the component back for use in other files
