@@ -5,19 +5,19 @@ var Schema = mongoose.Schema;
 
 // Create article schema
 var ArticleSchema = new Schema({
-  // title is a required string
-  title: {
-    type: String
-  },
-  // link is a required string
-  link: {
-    type: String,
-    unique: true
-  },
-  // This saves many note ObjectId, ref refers to the Note model
-  url: {
-    type: String,
-  }
+    // title is a required string
+    title: {
+        type: String
+    },
+    // link is a required string
+    date: {
+        type: Date
+    },
+    // This saves many note ObjectId, ref refers to the Note model
+    url: {
+        type: String,
+        unique: true
+    }
 });
 
 // Create the Article model with the ArticleSchema
