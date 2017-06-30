@@ -84,7 +84,7 @@ router.delete("/api/saved", function(req, res) {
             message: "Comment successfully deleted",
             id: todo._id
         }
-        res.send("done")
+        res.send("deleted")
     })
 
 });
